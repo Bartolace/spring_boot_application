@@ -32,7 +32,9 @@
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 
+
 		<dependency>
+			<!--para trabalhos com rest-->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>

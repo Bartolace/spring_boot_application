@@ -22,7 +22,7 @@ import java.util.List;
 //@Repository //Classe que encapsula todas as operações referentes as entitys. Que acessa a base de dados.
 public interface Clientes extends JpaRepository<Cliente, Integer>{
 
-    //query Methods //findByNomeLike
+    //query Methods por convecoes e por query criadas, tbm há as padroes que nem precisam ser escritas, exemplo: save. //
     // passar os paramentros na sequencia //List<Cliente> findByNomeOrIdOrderBy(String nome, Integer id);
     @Query(value = "select * from Cliente c where c.nome like '%:nome%' ", nativeQuery = true)
     List<Cliente> encontraPorNome(@Param("nome") String nome);

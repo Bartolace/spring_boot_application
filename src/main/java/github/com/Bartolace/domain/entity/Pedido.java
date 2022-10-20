@@ -23,7 +23,7 @@ public class Pedido {
     @Column(name = "total", precision = 20, scale = 2)
     private BigDecimal total;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido")// nome do campo que está em  item pedido, que chama
     private List<ItemPedido> itens;
 
 

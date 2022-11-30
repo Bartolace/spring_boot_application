@@ -4,6 +4,7 @@ import github.com.Bartolace.domain.entity.Cliente;
 import github.com.Bartolace.domain.entity.ItemPedido;
 import github.com.Bartolace.domain.entity.Pedido;
 import github.com.Bartolace.domain.entity.Produto;
+import github.com.Bartolace.domain.enums.StatusPedido;
 import github.com.Bartolace.domain.repository.Clientes;
 import github.com.Bartolace.domain.repository.ItemsPedidos;
 import github.com.Bartolace.domain.repository.Pedidos;
@@ -45,6 +46,7 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.setTotal(dto.getTotal());
         pedido.setDataPedido(LocalDate.now());
         pedido.setCliente(cliente);
+        pedido.setStatus(StatusPedido.REALIZADO);
 
         List<ItemPedido> itemsPedido = converterItems(pedido, dto.getItems() );
         repository.save(pedido);
@@ -80,6 +82,11 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public Optional<Pedido> obterPedidoCompleto(Integer id) {
         return repository.findByIdFetchItens(id);
+    }
+
+    @Override
+    public void atualizaStatus(Integer id, StatusPedido statusPedido) {
+
     }
 
 }

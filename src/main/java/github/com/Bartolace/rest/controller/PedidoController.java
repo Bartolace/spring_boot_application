@@ -2,6 +2,7 @@ package github.com.Bartolace.rest.controller;
 
 import github.com.Bartolace.domain.entity.ItemPedido;
 import github.com.Bartolace.domain.entity.Pedido;
+import github.com.Bartolace.rest.dto.AtualizacaoStatusPedidoDTO;
 import github.com.Bartolace.rest.dto.InformacaoItemPedidoDTO;
 import github.com.Bartolace.rest.dto.InformacoesPedidoDTO;
 import github.com.Bartolace.rest.dto.PedidoDTO;
@@ -15,8 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping("/api/pedidos")
@@ -45,6 +45,13 @@ public class PedidoController {
                     new ResponseStatusException(NOT_FOUND, "Pedido não encontrado"));
     }
 
+    @PatchMapping("{id}") // em vez de usar o putMapping, para atualizar apenas uma parte da entidade.
+    @ResponseStatus(NO_CONTENT) // nao retorna nenhum obj.
+    public void updateStatus( @PathVariable Integer id ,
+            @RequestBody AtualizacaoStatusPedidoDTO dto){
+
+    }
+
     //metodo que ajuda no getById de InformacoesPedidoDTO
     public InformacoesPedidoDTO converter (Pedido pedido){
        return InformacoesPedidoDTO
@@ -54,6 +61,7 @@ public class PedidoController {
                 .cpf(pedido.getCliente().getCpf())
                 .nomeCliente(pedido.getCliente().getNome())
                 .total(pedido.getTotal())
+                .status(pedido.getStatus().name())
                 .items(converter(pedido.getItens()))
                 .build();
     }

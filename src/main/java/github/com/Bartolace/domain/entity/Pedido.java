@@ -1,5 +1,6 @@
 package github.com.Bartolace.domain.entity;
 
+import github.com.Bartolace.domain.enums.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,10 @@ public class Pedido {
 
     @Column(name = "total", precision = 20, scale = 2)
     private BigDecimal total;
+
+    @Enumerated(EnumType.STRING) // não existe no banco de dados mas queremos gravar (enum)
+    @Column(name = "status")
+    private StatusPedido status;
 
     @OneToMany(mappedBy = "pedido")// nome do campo que está em  item pedido, que chama
     private List<ItemPedido> itens;

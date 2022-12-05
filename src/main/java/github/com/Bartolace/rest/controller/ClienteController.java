@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +40,7 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente save (@RequestBody Cliente cliente){ //resquestBody -> pendencia que vai receber como parametro
+    public Cliente save (@RequestBody @Valid Cliente cliente){ //resquestBody -> pendencia que vai receber como parametro
         return clientes.save(cliente);
 
     }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Data
@@ -18,6 +19,8 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.AUTO) // representa o auto-incremento
     @Column(name = "id") // quando o nome for diferente do campo bd
     private Integer id;
+
+    @NotEmpty(message = "Campo nome é obrigatório.")
     @Column(name = "nome", length = 100)
     private String nome;
 

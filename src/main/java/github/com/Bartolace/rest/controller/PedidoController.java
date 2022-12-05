@@ -2,6 +2,7 @@ package github.com.Bartolace.rest.controller;
 
 import github.com.Bartolace.domain.entity.ItemPedido;
 import github.com.Bartolace.domain.entity.Pedido;
+import github.com.Bartolace.domain.enums.StatusPedido;
 import github.com.Bartolace.rest.dto.AtualizacaoStatusPedidoDTO;
 import github.com.Bartolace.rest.dto.InformacaoItemPedidoDTO;
 import github.com.Bartolace.rest.dto.InformacoesPedidoDTO;
@@ -49,7 +50,8 @@ public class PedidoController {
     @ResponseStatus(NO_CONTENT) // nao retorna nenhum obj.
     public void updateStatus( @PathVariable Integer id ,
             @RequestBody AtualizacaoStatusPedidoDTO dto){
-
+        String novoStatus = dto.getNovoStatus();
+        service.atualizaStatus(id, StatusPedido.valueOf(novoStatus));
     }
 
     //metodo que ajuda no getById de InformacoesPedidoDTO

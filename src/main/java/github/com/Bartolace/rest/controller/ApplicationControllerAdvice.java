@@ -1,5 +1,6 @@
 package github.com.Bartolace.rest.controller;
 
+import github.com.Bartolace.exception.PedidoNaoEncontradoExceprion;
 import github.com.Bartolace.exception.RegraNegocioException;
 import github.com.Bartolace.rest.ApiErrors;
 import org.springframework.http.HttpStatus;
@@ -17,5 +18,11 @@ public class ApplicationControllerAdvice {
     public ApiErrors handleRegraNegocioExeception(RegraNegocioException ex){
         String mensagemErro = ex.getMessage();
         return new ApiErrors(mensagemErro); //retorna o novo obj de erros criado para uso
+    }
+
+    @ExceptionHandler(PedidoNaoEncontradoExceprion.class)
+    @ResponseStatus(NOT_FOUND)
+    public ApiErrors handlePedidoNotFoundException (PedidoNaoEncontradoExceprion ex) {
+        return new ApiErrors(ex.getMessage());
     }
 }

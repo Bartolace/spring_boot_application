@@ -9,6 +9,7 @@ import github.com.Bartolace.domain.repository.Clientes;
 import github.com.Bartolace.domain.repository.ItemsPedidos;
 import github.com.Bartolace.domain.repository.Pedidos;
 import github.com.Bartolace.domain.repository.Produtos;
+import github.com.Bartolace.exception.PedidoNaoEncontradoExceprion;
 import github.com.Bartolace.exception.RegraNegocioException;
 import github.com.Bartolace.rest.dto.ItemPedidoDTO;
 import github.com.Bartolace.rest.dto.PedidoDTO;
@@ -85,7 +86,15 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
+    @Transactional
     public void atualizaStatus(Integer id, StatusPedido statusPedido) {
+        repository.findById(id)
+                .map( pedido -> {
+                    pedido.setStatus(statusPedido);
+                    return repository.save(pedido);
+                }).orElseThrow( () -> new PedidoNaoEncontradoExceprion() );
+
+
 
     }
 

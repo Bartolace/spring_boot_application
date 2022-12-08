@@ -21,12 +21,12 @@ public class Cliente {
     @Column(name = "id") // quando o nome for diferente do campo bd
     private Integer id;
 
-    @NotEmpty(message = "Campo nome é obrigatório.")
+    @NotEmpty(message = "{campo.nome.obrigatorio}")
     @Column(name = "nome", length = 100)
     private String nome;
 
-    @NotEmpty(message = "Campo CPF é obrigatório.") //para quando estiver vazio
-    @CPF(message = "Informe um CPF válido.") //validador
+    @NotEmpty(message = "{campo.cpf.obrigatorio}") //para quando estiver vazio
+    @CPF(message = "{campo.cpf.invalido}") //validador
     @Column(name = "cpf", length = 11)
     private String cpf;
 
